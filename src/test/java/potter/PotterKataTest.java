@@ -12,9 +12,11 @@ public class PotterKataTest {
 
 	private Cashier underTest;
 	private ArrayList<PotterBook> books;
+	private Discounter discounter;
 
 	@Before public void setup() {
 		books = new ArrayList<PotterBook>();
+		discounter = new Discounter();
 	}
 	
 	@Test
@@ -41,7 +43,7 @@ public class PotterKataTest {
 		books.add(book4);
 		books.add(book5);
 		
-		underTest = new Cashier(books);
+		underTest = new Cashier(books, discounter);
 		assertThat(underTest.calc(), is(51.20));
 	}
 	
@@ -51,7 +53,7 @@ public class PotterKataTest {
 		book.purchase();
 		books.add(book);
 		
-		underTest = new Cashier(books);
+		underTest = new Cashier(books, discounter);
 		
 		assertThat(underTest.calc(), is(8.00));
 	}
@@ -61,15 +63,16 @@ public class PotterKataTest {
 		PotterBook book1 = new PotterBook("Stone");
 		PotterBook book2 = new PotterBook("Chamber");
 		
+		
 		book1.purchase();
 		book2.purchase();
 		
 		books.add(book1);
 		books.add(book2);
 		
-		underTest = new Cashier(books);
+		underTest = new Cashier(books, discounter);
 		
-		assertThat(underTest.calc(), is(15.96));
+		assertThat(underTest.calc(), is(15.92));
 	}
 	
 	
