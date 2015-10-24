@@ -19,17 +19,19 @@ public class Cashier {
 	}
 
 	private void sumAllBooks() {
-		for(PotterBook book : books)
+		for (PotterBook book : books)
 			sumCostOfCurrentBook(book);
+
+		cost = percentageToApply();
 	}
 
 	private void sumCostOfCurrentBook(PotterBook book) {
-		for(int i = 0; i < book.count(); i++)
-			cost += 8.00 - percentageToApply();
+		for (int i = 0; i < book.count(); i++)
+			cost += 8.00;
 	}
 
 	private double percentageToApply() {
-		return 8.00 * discounter.determineDiscount(books);
+		return cost * discounter.determineDiscount(books);
 	}
 
 }

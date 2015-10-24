@@ -2,6 +2,8 @@ package potter;
 
 import java.util.ArrayList;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -63,7 +65,6 @@ public class PotterKataTest {
 		PotterBook book1 = new PotterBook("Stone");
 		PotterBook book2 = new PotterBook("Chamber");
 		
-		
 		book1.purchase();
 		book2.purchase();
 		
@@ -72,7 +73,26 @@ public class PotterKataTest {
 		
 		underTest = new Cashier(books, discounter);
 		
-		assertThat(underTest.calc(), is(15.92));
+		assertThat(underTest.calc(), is(8 * 2 * .95));
+	}
+	
+	@Test
+	public void buyingThreeDifferentBooksGivesTenPercentDiscount() {
+		PotterBook book1 = new PotterBook("Stone");
+		PotterBook book2 = new PotterBook("Chamber");
+		PotterBook book3 = new PotterBook("Prisoner");
+		
+		book1.purchase();
+		book2.purchase();
+		book3.purchase();
+		
+		books.add(book1);
+		books.add(book2);
+		books.add(book3);
+		
+		underTest = new Cashier(books, discounter);
+		
+		assertThat(underTest.calc(), is(21.6));
 	}
 	
 	
