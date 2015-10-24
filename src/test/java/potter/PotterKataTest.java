@@ -100,7 +100,7 @@ public class PotterKataTest {
 		PotterBook book1 = new PotterBook("Stone");
 		PotterBook book2 = new PotterBook("Chamber");
 		PotterBook book3 = new PotterBook("Prisoner");
-		PotterBook book4 = new PotterBook("Order");
+		PotterBook book4 = new PotterBook("Goblet");
 		
 		book1.purchase();
 		book2.purchase();
@@ -115,6 +115,31 @@ public class PotterKataTest {
 		underTest = new Cashier(books, discounter);
 		
 		assertThat(underTest.calc(), is(25.6));
+	}
+	
+	@Test
+	public void buyingFiveDifferentBooksGivesTwentyFivePercentDiscount() {
+		PotterBook book1 = new PotterBook("Stone");
+		PotterBook book2 = new PotterBook("Chamber");
+		PotterBook book3 = new PotterBook("Prisoner");
+		PotterBook book4 = new PotterBook("Goblet");
+		PotterBook book5 = new PotterBook("Order");
+		
+		book1.purchase();
+		book2.purchase();
+		book3.purchase();
+		book4.purchase();
+		book5.purchase();
+		
+		books.add(book1);
+		books.add(book2);
+		books.add(book3);
+		books.add(book4);
+		books.add(book5);
+		
+		underTest = new Cashier(books, discounter);
+		
+		assertThat(underTest.calc(), is(30.0));
 	}
 	
 	
